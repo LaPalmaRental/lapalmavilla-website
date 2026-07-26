@@ -19,6 +19,7 @@
     @media(max-width:800px){.rooms{grid-template-columns:1fr;gap:45px}.rooms-heading{display:block}.rooms-heading>p{margin-top:20px}.bed-grid{gap:14px}.room-photo{height:125px}.room-card h3{font-size:19px}.room-details{grid-template-columns:1fr;margin-top:38px}.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:280px repeat(3,190px)}.gallery-image.large{grid-row:span 1;grid-column:span 2}}
     @media(max-width:460px){.bed-grid{grid-template-columns:1fr}.room-photo{height:180px}.gallery-grid{grid-template-rows:240px repeat(3,160px)}}
     .language-picker{margin-left:auto;margin-right:22px}.language-picker select{appearance:none;background:rgba(13,41,52,.45);color:#fff;border:1px solid rgba(255,255,255,.7);padding:8px 27px 8px 10px;font:600 11px var(--sans);letter-spacing:.05em;cursor:pointer}.language-picker option{color:var(--ink);background:#fff}@media(max-width:800px){.language-picker{margin-left:auto;margin-right:10px}.language-picker select{font-size:10px;padding:7px 20px 7px 8px}}
+    .form-error,.field-error{color:#a74635}.field-error{display:block;font-size:12px;font-weight:600;margin-top:-8px}.form-success:empty,.form-error:empty,.field-error:empty{display:none}.enquiry-form [aria-invalid="true"]{border-bottom-color:#a74635}.enquiry-form button:disabled{cursor:wait;opacity:.65;transform:none}
   </style>
 </head>
 <body>
@@ -107,12 +108,17 @@
 
     <section id="enquire" class="booking section">
       <div><p class="eyebrow">Your La Palma escape</p><h2>Ready when<br>you <em>are.</em></h2><p>Tell us the dates you have in mind and a little about your stay. We will come back to you personally with availability and booking details.</p></div>
-      <form id="enquiry-form" class="enquiry-form"><h3>Check availability</h3><label>Your name<input name="name" required autocomplete="name"></label><label>Email address<input type="email" name="email" required autocomplete="email"></label><label>Tell us a little about your stay<textarea name="message" rows="4" required placeholder="Dates, number of guests, anything you'd like to know…"></textarea></label><button class="button button-primary" type="submit">Send enquiry <span>→</span></button><p class="form-message" role="status"></p><small>We will connect this form to the booking inbox before it is used for live enquiries.</small></form>
+      <form id="enquiry-form" class="enquiry-form" action="https://formspree.io/f/xqergrry" method="POST"><h3>Check availability</h3><input type="hidden" name="_subject" value="Casa Feliz availability enquiry"><label>Your name<input name="name" required autocomplete="name" data-fs-field></label><span class="field-error" data-fs-error="name"></span><label>Email address<input type="email" name="email" required autocomplete="email" data-fs-field></label><span class="field-error" data-fs-error="email"></span><label>Tell us a little about your stay<textarea name="message" rows="4" required placeholder="Dates, number of guests, anything you'd like to know…" data-fs-field></textarea></label><span class="field-error" data-fs-error="message"></span><button class="button button-primary" type="submit" data-fs-submit-btn>Send enquiry <span>→</span></button><p class="form-message form-success" data-fs-success role="status"></p><p class="form-message form-error" data-fs-error role="alert"></p><small>Your enquiry is sent securely to <a href="mailto:johnandmariegelder@icloud.com">johnandmariegelder@icloud.com</a>.</small></form>
     </section>
   </main>
 
   <footer><a class="brand" href="#top"><span>Casa</span> Feliz<small>La Palma Rentals</small></a><p>Breña Alta, La Palma, Canary Islands</p><a href="#enquire">Check availability</a><p class="copyright">© <span id="year"></span> Casa Feliz</p></footer>
   <dialog class="lightbox"><button class="lightbox-close" aria-label="Close image">×</button><img src="" alt=""><p></p></dialog>
+  <script>
+    window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#enquiry-form', formId: 'xqergrry' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
   <script src="script.js"></script>
   <script src="translations.js"></script>
 </body>
